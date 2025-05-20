@@ -12,6 +12,7 @@ from gradio_client import Client
 from src import checker, config, guild_config, guild_tts_manager
 
 if __name__ == "__main__":
+    os.makedirs(os.path.dirname("./temp/wav"), exist_ok=True)
     config = config.Config()
     print(f"{config.rvc_default_model}")
     rvc_pitch = 0
