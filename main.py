@@ -50,8 +50,8 @@ if __name__ == "__main__":
         return result[1]
 
     def generate_wav(text, speaker=1, filepath="./temp/wav/audio.wav"):
-        host = "localhost"
-        port = 50021
+        host = config.voicevox_host
+        port = config.voicevox_port
         params = (
             ("text", text),
             ("speaker", speaker),
