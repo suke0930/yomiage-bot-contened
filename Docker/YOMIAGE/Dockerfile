@@ -11,10 +11,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# 非rootユーザー developer を作成（UID/GID固定）
-RUN groupadd -g 1030 developer && \
-    useradd -m -s /bin/bash -u 1030 -g 1030 developer && \
-    usermod -aG sudo developer
 
 # pyenv環境変数の設定
 ENV PYENV_ROOT="/root/.pyenv"
@@ -42,10 +38,10 @@ RUN echo ""
 RUN git clone https://github.com/suke0930/yomiage-bot-contened.git
 COPY requirements.txt /root/yomiage-bot-contened/
 RUN bash -lc " source ~/venv/bin/activate &&\
-cd yomiage-bot-contened &&\
-pip install -r requirements.txt"
+    cd yomiage-bot-contened &&\
+    pip install -r requirements.txt"
 WORKDIR /root/yomiage-bot-contened/
 
 
 # ENTRYPOINT ["tail", "-F", "/dev/null"]
- CMD ["/bin/bash", "-l", "-c", "source ~/venv/bin/activate && python3 main.py"]
+CMD ["/bin/bash", "-l", "-c", "source ~/venv/bin/activate && python3 main.py"]
