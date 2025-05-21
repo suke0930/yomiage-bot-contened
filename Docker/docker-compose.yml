@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  voicevox_engine:
+    image: voicevox/voicevox_engine:cpu-latest
+    container_name: voicevox
+    hostname: voicevox
+    restart: always
+    networks:
+      - yomiageproject
+
+  rvchost:
+    container_name: rvc
+    hostname: rvc
+    restart: always
+    build: RVC
+    networks:
+      - yomiageproject
+    volumes:
+      - ./RVC/Models:/root/Retrieval-based-Voice-Conversion-WebUI/assets/weights
+      - ./temp:/root/yomiage-bot-contened/temp
+  yomiage:
+    container_name: yomiage
+    hostname: yomiage
+    restart: always
+    build: YOMIAGE
+    networks:
+      - yomiageproject
+    volumes:
+      - ./YOMIAGE/configs/config.yml:/root/yomiage-bot-contened/configs/config.yml
+      # - ./YOMIAGE/dev:/home/developer/yomiage-bot-contened/
+      - ./temp:/root/yomiage-bot-contened/temp
+
+
+
+networks:
+  yomiageproject: 
+    driver: bridge
