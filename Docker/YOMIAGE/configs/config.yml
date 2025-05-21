@@ -1,0 +1,12 @@
+access_token: "token"
+application_id: "Application ID"
+rvc_default_model: "model_name"
+max_text_length: 100
+rvc_disabled: false
+
+##Dockerの場合以下は変更非推奨
+rvc_host: "rvc"
+rvc_port: 7865
+voicevox_host: "voicevox"
+voicevox_port: 50021
+##
